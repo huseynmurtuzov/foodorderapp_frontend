@@ -1,0 +1,60 @@
+.exclusive{
+    background-image: linear-gradient(to bottom ,#fdd8cc  ,#f8e6e6 ,#fdd8cc );
+    height: 55vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media only screen and (max-width:$bp-xl){
+        height: 40vh;
+    }
+    @media only screen and (max-width:$bp-lg){
+        height: 35vh;
+    }
+    @media only screen and (max-width:$bp-md){
+        height: 55vh;
+    }
+    @media only screen and (max-width:$bp-xsm){
+        height: 60vh;
+    }
+
+    padding: 6rem;
+    margin-top: 15rem;
+    &__img{
+        width: 35rem;
+    }
+
+    &__content{
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        gap: 5rem;
+        @media only screen and (max-width:$bp-md){
+            flex-direction: column;
+        }
+    } 
+ 
+    &__texts{
+        width: 40rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        @media only screen and (max-width:$bp-md){
+            align-items: center;
+        }
+
+    }
+
+    &__label{
+        font-size: 1.6rem;
+    }
+
+    &__name{
+        font-size: 4rem;
+    }
+
+    &__desc{
+        font-size: 1.2rem;
+    }
+}

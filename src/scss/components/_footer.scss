@@ -1,0 +1,102 @@
+.footer{
+    height: 40vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h5{
+        color: #fff;
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+    &__inner{
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr 1fr ;
+        @media only screen and (max-width:$bp-md){
+            grid-template-rows: repeat(2,1fr);
+            grid-template-columns: 1fr;
+            justify-content: center;
+        }
+        align-items: center;
+        justify-content: center;
+        gap: 4rem;
+        margin-bottom: 4rem;
+        &-1{
+            align-self: start;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            @media only screen and (max-width:$bp-md){
+                justify-self: center;
+                align-items: center;
+            }
+            &-img-wrap{
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+            }
+            &-img{
+                width: 15rem;
+            }
+            p{
+                font-size: 1.4rem;
+                color: rgba($color: #fff, $alpha: .5);
+            }
+        }
+
+        &-2{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            
+            &-img{
+                width: 20rem;
+            }
+            p{
+                font-size: 1.4rem;
+                color: rgba($color: #fff, $alpha: .5);
+                text-align:center;
+                @media only screen and (max-width:$bp-sm){
+                    width: 60%;
+                }
+            } 
+        }
+
+        &-3{
+            @media only screen and (max-width:$bp-md){
+                display: none;
+            }
+            ul{
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+            }
+            h5{
+                text-align: center;
+            }
+            a:visited,
+            a:link{
+                text-decoration: none;
+                color: rgba($color: #fff, $alpha: .5);
+                font-size: 1.4rem;
+                transition: all .3s;
+            }
+            a:hover{
+                color: #fff;
+            }
+        }
+    }
+
+    &__copyright{
+        p{
+            color: #fff;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+    }
+}

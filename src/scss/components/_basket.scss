@@ -1,0 +1,142 @@
+.basket {
+    width: 70%;
+    margin: 0 auto;
+    @media only screen and (max-width:$bp-md){
+        width: 80%;
+    }
+    @media only screen and (max-width:$bp-sm){
+        width:90%;
+    }
+    &__header{
+        display: flex; 
+        width: 100%;
+
+        background-color: orangered;  
+        color: #fff;
+        font-size: 1.5rem;
+        justify-content: space-between;
+
+
+        &-qs{
+            display: flex;
+            justify-content: flex-end;
+            gap: 20rem;
+        }
+    }
+
+    &__wrap{
+        position: relative;
+    }
+    
+    &__product{
+        
+        &-wrap{
+            display: flex;
+            align-items: center;
+            justify-content: space-between; 
+            padding: 1rem;
+            @media only screen and (max-width:$bp-sm){
+                padding: 0;
+            }
+
+        }
+
+        &-info-wrap{
+            display: flex;
+            gap: 1rem;
+            @media only screen and (max-width:$bp-sm){
+                gap: 0;
+            }
+        }
+
+        &-img{
+            width: 6rem;
+        }
+
+        &-inner-wrap{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: .5rem;
+            @media only screen and (max-width:$bp-sm){
+                gap: 0;
+            }
+            
+        }
+
+        &-name{
+            font-size: 1.4rem;
+            color:#777
+        }
+
+        &-price{
+            font-size: 1.2rem;
+            color: lighten($color: #777, $amount: 10);
+        }
+
+        &-btn{
+            background-color: transparent;
+            color: orangered;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+            &:focus{ 
+                outline: none;
+            }
+        }
+
+        &-qs{
+            display: flex;
+            gap: 22rem;
+            @media only screen and (max-width:$bp-sm){
+                gap: 22rem;
+            }
+            align-items: center;
+            justify-content: space-between;
+        }
+        &-quantity{
+            font-size: 1.5rem;
+            border: 1px solid black;
+            padding: 1rem;
+            line-height: 1;
+        }
+
+        &-subtotal{
+            font-size: 1.5rem;
+        }
+    }
+
+    &__payment{
+        position: absolute;
+        right: 0;
+        top: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 30%;
+        .border-bottom{
+            width: 100%;
+        }
+        button{
+            margin-top: 2rem;
+        }
+    }
+
+    &__inner-subtotal{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    &__label{
+        font-size: 1.5rem;
+        color: #777;
+    }
+
+    &__price{
+        font-size: 1.5rem;
+        color: #777;
+    }
+
+
+} 

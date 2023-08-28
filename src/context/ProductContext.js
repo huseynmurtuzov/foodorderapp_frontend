@@ -1,0 +1,138 @@
+import { createContext, useContext } from "react";
+import product1 from '../images/product-1.jpg'
+import product2 from '../images/product-2.jpg'
+import product3 from '../images/product-3.jpg'
+import product4 from '../images/product-4.jpg'
+
+import product5 from '../images/product-5.jpg'
+import product6 from '../images/product-6.jpg'
+import product7 from '../images/product-7.jpg'
+import product8 from '../images/product-8.jpg'
+
+import product9 from '../images/product-9.jpg'
+import product10 from '../images/product-10.jpg'
+import product11 from '../images/product-11.jpg'
+import product12 from '../images/product-12.jpg'
+const Context = createContext();
+
+const data1 = [
+    {
+        name:"Red Printed T-Shirt",
+        img:product1,
+        price:50,
+        score:4,
+        quantity:1
+    
+    },
+    {
+        name:"HRX Sports Shoes",
+        img:product2,
+        price:75,
+        score:5,
+        quantity:1
+
+      
+    },
+    {
+        name:"HRX Gray Trackpants",
+        img:product3,
+        price:75,
+        score:5,
+        quantity:1
+
+        
+    },
+    {
+        name:"Blue Printed T-Shirt",
+        img:product4,
+        price:55,
+        score:4,
+        quantity:1
+    }];
+const data2 = [
+    {
+        name:"Puma Gray Sports Shoe",
+        img:product5,
+        price:95,
+        score:4,
+        quantity:1
+
+
+    },
+    {
+        name:"Black Printed T-Shirt",
+        img:product6,
+        price:65,
+        score:5,
+        quantity:1
+
+    
+    },
+    {
+        name:"HRX Set of 3 Socks",
+        img:product7,
+        price:30,
+        score:4,
+        quantity:1
+
+    
+    },
+    {
+        name:"Black Fossil Watch",
+        img:product8,
+        price:120,
+        score:4,
+        quantity:1
+
+    
+    },
+    {
+        name:"Black SportX Watch",
+        img:product9,
+        price:135,
+        score:5,
+        quantity:1
+
+        
+    },
+    {
+        name:"Black HRX Shoe",
+        img:product10,
+        price:50,
+        score:4,
+        quantity:1
+
+    
+    },
+    {
+        name:"Gray Nike Shoe",
+        img:product11,
+        price:55,
+        score:5,
+        quantity:1
+
+        
+    },
+    {
+        name:"HRX Black Trackpants",
+        img:product12,
+        price:75,
+        score:5,
+        quantity:1
+
+    },
+]
+
+const Provider = ({children}) => {
+    const data = [data1,data2];
+
+    return(
+        <Context.Provider value={data}>
+            {children}
+        </Context.Provider>
+    )
+}
+
+export const useProduct = () => useContext(Context);    
+
+export default Provider;

@@ -1,0 +1,21 @@
+.btn{
+    border: none;
+    &:focus{
+        outline: none;
+    }
+    padding: 1rem 2.5rem;
+    border-radius: 2rem;
+    transition: all .3s;
+    font-family: 'Poppins','sans-serif';
+
+    &-primary{
+        background-color: orangered ;
+        color: #fff;
+
+        &:hover{
+            background-color: darken($color: orangered, $amount: 10);
+        }
+    }
+}   
+
+

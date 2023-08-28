@@ -1,0 +1,30 @@
+.companies{  
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(5,1fr);
+    @media only screen and (max-width:$bp-md){
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: repeat(3,1fr);
+        justify-self: center;
+        align-items: center;
+    }
+    @media only screen and (max-width:$bp-md){
+        
+    }
+    gap: 4rem;
+    margin-top: 15rem;
+    margin-bottom: 10rem;
+    &__img{
+        width: 20rem;
+        @media only screen and (max-width:$bp-sm){
+            width: 70%;
+        }
+        filter: grayscale(100%);
+        transition: all .3s;
+        justify-self: center;
+        &:hover{
+            filter: grayscale(0%);
+        }
+    }
+}

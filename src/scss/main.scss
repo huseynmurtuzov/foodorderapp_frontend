@@ -1,0 +1,21 @@
+@import './abstracts/functions';
+@import './abstracts/mixins';
+@import './abstracts/variables';
+@import './abstracts/buttons';
+
+@import './base/animations';
+@import './base/base';
+@import './base/typography';
+@import './base/utilities'; 
+
+@import './components/nav';
+@import './components/header';
+@import './components/products';
+@import './components/exclusive';
+@import './components/comments';
+@import './components/companies';
+@import './components/footer';
+@import './components/detail';
+@import './components/contact';
+@import './components/basket';
+

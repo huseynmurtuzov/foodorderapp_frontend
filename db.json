@@ -1,0 +1,28 @@
+{
+  "addedProducts": [
+    {
+      "name": "HRX Sports Shoes",
+      "img": "/static/media/product-2.7e62a954384ddbbbd545.jpg",
+      "price": 75,
+      "score": 5,
+      "quantity": 1,
+      "id": 1
+    },
+    {
+      "name": "Red Printed T-Shirt",
+      "img": "/static/media/product-1.e05936f223ba90a97ce9.jpg",
+      "price": 50,
+      "score": 4,
+      "quantity": 1,
+      "id": 2
+    },
+    {
+      "name": "HRX Sports Shoes",
+      "img": "/static/media/product-2.7e62a954384ddbbbd545.jpg",
+      "price": 75,
+      "score": 5,
+      "quantity": 1,
+      "id": 3
+    }
+  ]
+}
