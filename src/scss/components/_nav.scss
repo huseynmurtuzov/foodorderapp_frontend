@@ -10,6 +10,8 @@
     }
 
     ul{
+        
+        
         li{
             @media only screen and (max-width:$bp-md){
                 display: none;
@@ -33,11 +35,43 @@
         @media only screen and (max-width:$bp-md){
             display: inline-block !important;
         }
+
         gap: 0;
     }
 
-    &__item{
+    &__offcanvas {
+        position: absolute;
+        width: 100%;
+        height: 30vh;
+        background-color: #777;
+        color: #fff;
+        top: 0;
+        left: 0;
 
+        ul{
+            @media only screen and (max-width:$bp-md){
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                width: 100%;
+                margin-top: 5rem;
+                margin-left: 2rem;
+            }
+        }
+
+        &-btn{
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+    }
+
+    &__item{
+        @media only screen and (max-width:$bp-md){
+            :hover{
+                background-color: darken($color: #777, $amount: 10);
+            }
+        }
     }
 
     
@@ -50,6 +84,10 @@
             font-weight: 400;
             display: inline-block;
             position: relative;
+            @media only screen and (max-width:$bp-md){
+                color: #fff;
+            }
+
         }
 
         &::before{

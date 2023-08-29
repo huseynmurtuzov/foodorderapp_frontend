@@ -137,6 +137,29 @@ body {
     @media only screen and (max-width: 56.25em) {
       .nav__toggle {
         display: inline-block !important; } }
+  .nav__offcanvas {
+    position: absolute;
+    width: 100%;
+    height: 30vh;
+    background-color: #777;
+    color: #fff;
+    top: 0;
+    left: 0; }
+    @media only screen and (max-width: 56.25em) {
+      .nav__offcanvas ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+        margin-top: 5rem;
+        margin-left: 2rem; } }
+    .nav__offcanvas-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem; }
+  @media only screen and (max-width: 56.25em) {
+    .nav__item :hover {
+      background-color: #5e5e5e; } }
   .nav__link:link, .nav__link:visited {
     text-decoration: none;
     font-size: 1.6rem;
@@ -144,6 +167,9 @@ body {
     font-weight: 400;
     display: inline-block;
     position: relative; }
+    @media only screen and (max-width: 56.25em) {
+      .nav__link:link, .nav__link:visited {
+        color: #fff; } }
   .nav__link::before {
     content: '';
     position: absolute;

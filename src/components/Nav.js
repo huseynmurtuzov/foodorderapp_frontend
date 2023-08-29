@@ -20,7 +20,9 @@ function Nav() {
                 <li className='nav__item'><a href="" className='nav__link'>About</a></li>
                 <li className='nav__item'><Link className='nav__link' to='/account'>Account</Link></li> 
                 <li className='nav__item'><Link className='nav__svg' to='/basket'><i class="fa-solid fa-bag-shopping fa-3x" ></i></Link></li>
-                <OffCanvasExample/>
+                <div> 
+                  <OffCanvasExample />
+                </div>
             <div>
             </div>
             </ul>
