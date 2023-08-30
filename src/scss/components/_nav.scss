@@ -10,8 +10,6 @@
     }
 
     ul{
-        
-        
         li{
             @media only screen and (max-width:$bp-md){
                 display: none;
@@ -35,7 +33,6 @@
         @media only screen and (max-width:$bp-md){
             display: inline-block !important;
         }
-
         gap: 0;
     }
 

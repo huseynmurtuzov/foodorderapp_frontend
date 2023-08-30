@@ -384,7 +384,7 @@ body {
       height: 55vh; } }
   @media only screen and (max-width: 28.125em) {
     .exclusive {
-      height: 60vh; } }
+      height: 65vh; } }
   .exclusive__img {
     width: 35rem; }
   .exclusive__content {
@@ -699,6 +699,9 @@ body {
   .contact__form-login.active {
     opacity: 1;
     transform: translateX(25%); }
+    @media only screen and (max-width: 56.25em) {
+      .contact__form-login.active {
+        transform: translateX(20%); } }
   .contact__form-login.unactive {
     transform: translate(200%); }
   .contact__form-register {
@@ -717,6 +720,9 @@ body {
   .contact__form-register.active {
     opacity: 1;
     transform: translateX(-75%); }
+    @media only screen and (max-width: 56.25em) {
+      .contact__form-register.active {
+        transform: translateX(-80%); } }
   .contact__form-register.unactive {
     transform: translate(-200%); }
 
