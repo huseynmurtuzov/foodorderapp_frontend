@@ -288,7 +288,8 @@ function CustomerAdminPage() {
               ))}
               
             
-            </div>
+            </div> 
+            
   
             <div className="deliveryPersonnelAdmin__orders reviews">
               <h2 style={{ textAlign: "center" }}>Reviews</h2>
