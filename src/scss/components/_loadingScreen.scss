@@ -1,0 +1,28 @@
+/* Yükleme ekranını ortalamak için */
+.loading-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff;
+  }
+  
+  /* Logo animasyonu */
+  .logo {
+    width: 150px; /* Logo boyutunu ayarla */
+    animation: blink 1.5s infinite ease-in-out;
+  }
+  
+  /* Yanıp sönme animasyonu */
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  

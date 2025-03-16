@@ -1,0 +1,76 @@
+.deliveryPersonnelAdmin{
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    padding: 2rem;
+    font-size: 1.5rem;
+    align-items: center;
+    &_input{
+        border-radius: 5px;
+        outline: none;
+        background-color: rgba($color: #000000, $alpha: .1); 
+        border: .2px solid lightgray;
+        padding: 1rem ;
+    }
+    &_label{
+        font-size: 1.5rem; 
+    }
+    &__btnWrap{
+        display: flex;
+        column-gap: 2rem;
+    }
+    &_dataWrap{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__name{
+        font-size: 3rem;
+    }
+    &__address{
+        font-size:  2.8rem;
+
+    }
+    &__phone{
+        font-size:  2.8rem;
+
+    }
+    &__comment{
+
+    }
+    &__orders{
+        display: flex;
+        flex-direction: column; 
+        row-gap: 1rem;
+    }
+    &__order{
+        display: flex;
+        justify-content: space-between;
+        column-gap: 24rem;
+        background-color: lightgray;
+        padding: 1rem;
+    }
+} 
+.orderCard {
+    background-color: #ff5400; /* Buton rengine uygun turuncu */
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+    align-items: center;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .orderCard__details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .orderCard__status {
+    text-align: right;
+  }
+  

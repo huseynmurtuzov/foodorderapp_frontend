@@ -1,0 +1,114 @@
+.comment{
+    &__wrap{
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        padding: 1rem;
+
+        &-form{
+            display: grid;
+            grid-template-columns: 1fr 5rem;
+            column-gap: 3rem;
+        }
+    }
+    &__header{
+        font-size: 2.5rem;    
+    }
+    &__form{
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        padding: 1rem 0rem;
+        &-label{
+            font-size: 1.6rem;
+        }
+        &-text{
+            
+        }
+        &-rating{
+            padding: 1rem;
+        }
+    }
+ 
+}
+.comments{
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+    padding: 3rem;
+}
+// .exactComment{
+//     display: flex;
+//     flex-direction: column;
+//     row-gap: .5rem;
+//     position: relative;
+//     &__header{
+//         display: flex;
+//         justify-content: space-between;
+//     }
+//     &__name{
+//         font-size: 2rem;
+//         font-weight: bold;
+//     }
+//     &__text{
+//         font-size: 1.5rem;
+//     }   
+//     &__btn{
+//         position: absolute;
+//         top: 2rem;
+//         right: 1rem;
+//         width: 2rem;
+//     }
+// }
+.exactComment {
+    background: #fff;
+    border: 2px solid #ff5500;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 6px rgba(255, 85, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.exactComment__header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+.exactComment__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exactComment__text {
+    font-size: 16px;
+    flex: 1;
+}
+
+.exactComment__rating {
+    background: #ff5500;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    min-width: 50px;
+    text-align: center;
+}
+
+.exactComment__btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #ff5500;
+    font-size: 18px;
+    align-self: flex-end;
+    transition: color 0.3s;
+}
+
+.exactComment__btn:hover {
+    color: #cc4400;
+}

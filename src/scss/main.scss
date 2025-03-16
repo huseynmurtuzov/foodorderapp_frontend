@@ -8,14 +8,23 @@
 @import './base/typography';
 @import './base/utilities'; 
 
-@import './components/nav';
+@import './components/nav'; 
 @import './components/header';
 @import './components/products';
 @import './components/exclusive';
 @import './components/comments';
-@import './components/companies';
+@import './components/companies'; 
 @import './components/footer';
 @import './components/detail';
 @import './components/contact';
 @import './components/basket';
-
+@import './components/addToBasket'; 
+@import './components/removeFromBasket';
+@import './components/register';
+@import './components/customerAdminPage';
+@import './components/deliveryPersonnelAdminPage';
+@import './components/restaurantAdminPage';
+@import './components/editFood';
+@import './components/comment';
+@import './components/loadingScreen';
+@import './components/payment';

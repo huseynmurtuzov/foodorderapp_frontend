@@ -2,11 +2,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem;
+    padding: 0rem 2rem;
     &__logo{
-        width: 15rem;
+        width: 12rem;
         display: flex;
         justify-content: flex-start;
+        &-text{
+            font-size: 2.5rem;
+            color: orangered;
+            font-weight: bold;
+        }
+    }
+    &__logo-wrap{
+        display: flex;
+        align-items: center; 
     }
 
     ul{

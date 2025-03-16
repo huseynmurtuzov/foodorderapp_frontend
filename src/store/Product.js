@@ -13,174 +13,162 @@ import product9 from '../images/product-9.jpg'
 import product10 from '../images/product-10.jpg'
 import product11 from '../images/product-11.jpg'
 import product12 from '../images/product-12.jpg'
-const data1 = [
-    {
-        name:"Red Printed T-Shirt",
-        img:product1,
-        price:50,
-        score:4,
-        quantity:1
+// const data1 = [
+//     {
+//         name:"Red Printed T-Shirt",
+//         img:product1,
+//         price:50,
+//         score:4,
+//         quantity:1
     
-    },
-    {
-        name:"HRX Sports Shoes",
-        img:product2,
-        price:75,
-        score:5,
-        quantity:1
+//     },
+//     {
+//         name:"HRX Sports Shoes",
+//         img:product2,
+//         price:75,
+//         score:5,
+//         quantity:1
 
       
-    },
-    {
-        name:"HRX Gray Trackpants",
-        img:product3,
-        price:75,
-        score:5,
-        quantity:1
+//     },
+//     {
+//         name:"HRX Gray Trackpants",
+//         img:product3,
+//         price:75,
+//         score:5,
+//         quantity:1
 
         
-    },
-    {
-        name:"Blue Printed T-Shirt",
-        img:product4,
-        price:55,
-        score:4,
-        quantity:1
-    }];
-const data2 = [
-    {
-        name:"Puma Gray Sports Shoe",
-        img:product5,
-        price:95,
-        score:4,
-        quantity:1
+//     },
+//     {
+//         name:"Blue Printed T-Shirt",
+//         img:product4,
+//         price:55,
+//         score:4,
+//         quantity:1
+//     }];
+// const data2 = [
+//     {
+//         name:"Puma Gray Sports Shoe",
+//         img:product5,
+//         price:95,
+//         score:4,
+//         quantity:1
 
 
-    },
-    {
-        name:"Black Printed T-Shirt",
-        img:product6,
-        price:65,
-        score:5,
-        quantity:1
-
-    
-    },
-    {
-        name:"HRX Set of 3 Socks",
-        img:product7,
-        price:30,
-        score:4,
-        quantity:1
+//     },
+//     {
+//         name:"Black Printed T-Shirt",
+//         img:product6,
+//         price:65,
+//         score:5,
+//         quantity:1
 
     
-    },
-    {
-        name:"Black Fossil Watch",
-        img:product8,
-        price:120,
-        score:4,
-        quantity:1
+//     },
+//     {
+//         name:"HRX Set of 3 Socks",
+//         img:product7,
+//         price:30,
+//         score:4,
+//         quantity:1
 
     
-    },
-    {
-        name:"Black SportX Watch",
-        img:product9,
-        price:135,
-        score:5,
-        quantity:1
+//     },
+//     {
+//         name:"Black Fossil Watch",
+//         img:product8,
+//         price:120,
+//         score:4,
+//         quantity:1
+
+    
+//     },
+//     {
+//         name:"Black SportX Watch",
+//         img:product9,
+//         price:135,
+//         score:5,
+//         quantity:1
 
         
-    },
-    {
-        name:"Black HRX Shoe",
-        img:product10,
-        price:50,
-        score:4,
-        quantity:1
+//     },
+//     {
+//         name:"Black HRX Shoe",
+//         img:product10,
+//         price:50,
+//         score:4,
+//         quantity:1
 
     
-    },
-    {
-        name:"Gray Nike Shoe",
-        img:product11,
-        price:55,
-        score:5,
-        quantity:1
+//     },
+//     {
+//         name:"Gray Nike Shoe",
+//         img:product11,
+//         price:55,
+//         score:5,
+//         quantity:1
 
         
-    },
-    {
-        name:"HRX Black Trackpants",
-        img:product12,
-        price:75,
-        score:5,
-        quantity:1
+//     },
+//     {
+//         name:"HRX Black Trackpants",
+//         img:product12,
+//         price:75,
+//         score:5,
+//         quantity:1
 
-    },
-]
-const getProductsFromBasket =  async(state) => {
-    const response = await fetch('http://localhost:3000/addedProducts');
-    const data = await response.json();
-    return data;
-    }
-export const fetchAsyncData =  createAsyncThunk('data/fetch', async () => {
-    const result = await getProductsFromBasket();
-    return result;
-});
+//     },
+// ]
+// const getProductsFromBasket =  async(state) => {
+//     const response = await fetch('http://localhost:3000/addedProducts');
+//     const data = await response.json();
+//     return data;
+//     }
+// export const fetchAsyncData =  createAsyncThunk('data/fetch', async () => {
+//     const result = await getProductsFromBasket();
+//     return result;
+// });
 const initialState = {
-    products:[data1,data2],
-    exactProduct:{},
     addedProducts:[],
-    loading: false,
-    error: null,
 }
 
 const product = createSlice({
     name:'product',
-    initialState,
+    initialState,   
     reducers:{
-        setExactProduct:(state,action) => {
-            state.exactProduct = action.payload;
-        },
+        
         addBasket:(state,action) => {
-            fetch('http://localhost:3000/addedProducts',{
-                method:'POST',
-                headers:{
-                    'Content-Type' : 'application/json'
-                },
-                body:JSON.stringify(action.payload)
-            }).then(response => response.json());            
+            state.addedProducts = [...state.addedProducts,action.payload];        
         },
         removeProductFromBasket:(state,action) => {
-            fetch(`http://localhost:3000/addedProducts/${action.payload}`,{
-                method:'DELETE'
-            })
-              .catch(error => {
-                console.error('Hata:', error);
-              });
-            },
+            state.addedProducts = state.addedProducts.filter(p => p.id != action.payload)
+        },
+        refreshBasket:(state,action) => {
+            state.addedProducts = [];
+        },
         
-    changeQuantity: (state,action) => {
-        state.exactProduct.quantity = action.payload
+
+        
+    // changeQuantity: (state,action) => {
+    //     state.exactProduct.quantity = action.payload
+    // },
     },
-    },
-    extraReducers: (builder) => {
-        builder
-            .addCase(fetchAsyncData.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(fetchAsyncData.fulfilled, (state, action) => {
-                state.loading = false;
-                state.addedProducts = action.payload;
-            })
-            .addCase(fetchAsyncData.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.error.message;
-            });
-    },
+    // extraReducers: (builder) => {
+    //     builder
+    //         .addCase(fetchAsyncData.pending, (state) => {
+    //             state.loading = true;
+    //         })
+    //         .addCase(fetchAsyncData.fulfilled, (state, action) => {
+    //             state.loading = false;
+    //             state.addedProducts = action.payload;
+    //         })
+    //         .addCase(fetchAsyncData.rejected, (state, action) => {
+    //             state.loading = false;
+    //             state.error = action.error.message;
+    //         });
+    // },
 })
 
-export const {setExactProduct,addBasket,removeProductFromBasket,changeQuantity} = product.actions;
+export const {addBasket,removeProductFromBasket,refreshBasket} = product.actions;
 export default product.reducer;

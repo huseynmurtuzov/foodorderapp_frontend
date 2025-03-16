@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useProduct } from '../context/ProductContext';
-import { setExactProduct } from '../store/Product'
+// import { setExactProduct } from '../store/Product'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.png'
@@ -52,7 +52,7 @@ function AllProducts() {
             (selectValue == 0 && (
                 datas.map((product) => {
                     const handleClick = () => {
-                        dispatch(setExactProduct(product));
+                        // dispatch(setExactProduct(product));
                     }
                     return (
                         <Link to='/productDetail' className='link' style={{textDecoration:'none',color:'black'}} >
@@ -94,7 +94,7 @@ function AllProducts() {
             (selectValue == 1 && (
                 sortedByIncreasingPrice.map((product) => {
                     const handleClick = () => {
-                        dispatch(setExactProduct(product));
+                        // dispatch(setExactProduct(product));
                       }
                     return (
                         <Link to='/productDetail' className='link' style={{textDecoration:'none',color:'black'}} >
@@ -136,7 +136,7 @@ function AllProducts() {
 (selectValue == 2 && (
                 sortedByDecreasingPrice.map((product) => {
                     const handleClick = () => {
-                        dispatch(setExactProduct(product));
+                        // dispatch(setExactProduct(product));
                       }
                     return (
                         <Link to='/productDetail' className='link' style={{textDecoration:'none',color:'black'}} >
@@ -179,7 +179,7 @@ function AllProducts() {
 (selectValue == 3 && (
                 sortedByScore.map((product) => {
                     const handleClick = () => {
-                        dispatch(setExactProduct(product));
+                        // dispatch(setExactProduct(product));
                       }
                     return (
                         <Link to='/productDetail' className='link' style={{textDecoration:'none',color:'black'}} >

@@ -1,47 +1,38 @@
+
 .contact{
     &__form-wrap{
         width: 30rem;
         background-color: #fff;
-        height: 30rem;
-        
+        height: 35rem;
     }
 
     &__form-mode-wrap{
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: center; 
         justify-content: center;
         padding: 2rem;
-        
-        div:first-child{
-            display: flex;
-            align-items: center;
-            gap: 5rem;
-        }
-
-        div:last-child{
-            display: flex;
-            justify-content: flex-start;
-            position: relative;
-            width: 60%;
-
-        }
         .border-bottom{
-            transition: all .5s;
-            position: absolute;
-            left: -2.5rem;
+            width: 50%;
         }
-        .border-bottom.register{
-            position: absolute;
-            left: 7.5rem;
-        }
-        .border-bottom.login{
-            position: absolute;
-            left: -2.5rem;
-        }
+        // div:first-child{
+        //     display: flex;
+        //     align-items: center;
+        //     gap: 5rem;
+        // }
+
+        // div:last-child{
+        //     display: flex;
+        //     justify-content: flex-start;
+        //     position: relative;
+        //     width: 60%;
+
+        // }
+
+
     }
 
-    &__form-mode{ 
+    &__form-mode{
         &:link,
         &:visited{
             color: #777;
@@ -64,62 +55,62 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 3rem;
+            gap: 2rem;
+            // margin-top: 3rem;
             opacity: 0;
-            transform: translateX(-125%);
+            // transform: translateX(-125%);
 
             button{
-                width: 100%;
+                width: 60%;
             }
 
-            
+
         }
         &-login.active{
             opacity: 1;
-            transform: translateX(25%);
-            @media only screen and (max-width:$bp-md){
-                transform: translateX(20%);
-            }
+            // transform: translateX(25%);
+            // @media only screen and (max-width:$bp-md){
+            //     transform: translateX(20%);
+            // }
         }
         &-login.unactive{
             transform: translate(200%);
         }
-        &-register{
-            transition: transform .5s;
-            display: flex;
-            opacity: 0;
-            margin-top: 3rem;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            width: 100%;
-            transform: translateX(-150%);
+        // &-register{
+        //     transition: transform .5s;
+        //     display: flex;
+        //     opacity: 0;
+        //     margin-top: 3rem;
+        //     flex-direction: column;
+        //     align-items: center;
+        //     justify-content: center;
+        //     gap: 1rem;
+        //     width: 100%;
+        //     transform: translateX(-150%);
 
-            button{
-                width: 100%;
-            }
-            
-        }
-        &-register.active{
-                opacity: 1;
-                transform: translateX(-75%);
-                @media only screen and (max-width:$bp-md){
-                    transform: translateX(-80%);
-                }
-        }
-        &-register.unactive{
-            transform: translate(-200%);
-        }
+        //     button{
+        //         width: 100%;
+        //     }
+
+        // }
+        // &-register.active{
+        //         opacity: 1;
+        //         transform: translateX(-75%);
+        //         @media only screen and (max-width:$bp-md){
+        //             transform: translateX(-80%);
+        //         }
+        // }
+        // &-register.unactive{
+        //     transform: translate(-200%);
+        // }
     }
 
     &__input{
         padding: 1rem 1.5rem;
         border-radius: 30px;
-        border: none;   
-        background-color: #eee;  
-                
+        border: none;
+        background-color: #eee;
+
         &:focus{
             outline: none;
         }

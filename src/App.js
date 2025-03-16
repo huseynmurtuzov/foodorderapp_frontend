@@ -12,6 +12,14 @@ import ProductProvider from './context/ProductContext';
 import AllProducts from './components/AllProducts';
 import Contact from './components/Contact';
 import Basket from './components/Basket';
+import Restaurants from './components/Restaurants';
+import Register from './components/Register';
+import Login from './components/Login';
+import RegisterAsRestaurant from './components/RegisterAsRestaurant';
+import RegisterAsDeliveryPersonnel from './components/RegisterAsDeliveryPersonnel';
+import CustomerAdminPage from './components/CustomerAdminPage';
+import DeliveryPersonnelAdminPage from './components/DeliveryPersonnelAdminPage';
+import RestaurantAdminPage from './components/RestaurantAdminPage';
 
 function App() {
   return (
@@ -19,10 +27,17 @@ function App() {
       <ProductProvider>
         <Routes>
           <Route path='/' element={<Project/>}/>
-          <Route path='/productDetail' element={<ProductDetail/>}/>
+          <Route path='/productDetail/:id' element={<ProductDetail/>}/>
           <Route path='/products' element={<AllProducts/>}/>
-          <Route path='/account' element={<Contact/>}/>
+          <Route path='/restaurants' element={<Restaurants/>}/>
           <Route path='/basket' element={<Basket/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/>
+          <Route path='/registerAsRestaurant' element={<RegisterAsRestaurant/>}/>
+          <Route path='/registerAsDeliveryPersonnel' element={<RegisterAsDeliveryPersonnel/>}/>
+          <Route path='/CustomerAdminPage' element={<CustomerAdminPage/>}/>
+          <Route path='/DeliveryPersonnelAdminPage' element={<DeliveryPersonnelAdminPage/>}/>
+          <Route path='/RestaurantAdminPage' element={<RestaurantAdminPage/>}/>
         </Routes>
       </ProductProvider>
 

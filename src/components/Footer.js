@@ -1,7 +1,7 @@
 import React from 'react'
 import googlePlay from '../images/play-store.png';
 import appStore from '../images/app-store.png';
-import whiteLogo from '../images/logo-white.png'
+import whiteLogo from '../images/onlinefoodlogo-removebg-preview.webp'
  
 function Footer() {
   return (
@@ -17,14 +17,16 @@ function Footer() {
                     </div>
                 </div>
                 <div className='footer__inner-2'>
-                    <img src={whiteLogo} className='footer__inner-2-img' />
+                    <div style={{display:"flex",alignItems:"center"}}>
+                    <img src={whiteLogo} className='footer__inner-2-img' /> <span style={{color:"orangered",fontWeight:"bold",fontSize:"3rem",textAlign:"center"}}>MurtuzAminOrder.com</span>
+                    </div>
                     <p>Our Purpose is To Sustainably Make the Pleasure and Benefits of Sports Accessible to the Many</p>
                 </div>
                 <div className='footer__inner-3'>
                     <h5>Useful Links</h5>
                     <ul>
-                        <li><a href="">Coupons</a></li>
-                        <li><a href="">Blog Post</a></li>
+                        <li><a href="/registerAsRestaurant">Register as Restaurant</a></li>
+                        <li><a href="/registerAsDeliveryPersonnel">Register as Delivery Personnel</a></li>
                         <li><a href="">Roturn Policy </a></li>
                         <li><a href="">Join Affiliate</a></li>
                     </ul>
@@ -40,7 +42,7 @@ function Footer() {
                 </div>
             </div>
             <div className='footer__copyright'>
-               <p>Copyright 2023 MirtizDev</p> 
+               <p>Copyright 2025 MirtizDev</p> 
             </div>
         </div>
     </div>

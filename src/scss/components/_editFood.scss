@@ -1,0 +1,117 @@
+.editFood{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    @media only screen and (max-width:$bp-lg){
+        flex-direction: column;
+        align-items: center;
+    }
+    @media only screen and (max-width:$bp-lg){
+        text-align: center;
+    }
+    gap: 2rem;
+    &_removeBtn{ 
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        text-align: center;
+
+    }
+    &__img{
+        width: 30%;
+        @media only screen and (max-width:$bp-lg){
+            width: 40%;
+        }
+    } 
+
+    &__content{
+        width: 40%;
+        @media only screen and (max-width:$bp-lg){
+            width: 60%;
+        }
+        padding: 2rem;
+    }
+
+    &__breadcrumb{
+        color: #777;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    &__name{
+        font-size: 4rem;
+    }
+
+    &__price{
+        font-size: 1.6rem;
+        color: #777;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    &__select{
+        border: 1px solid orangered;
+        background-color: transparent;
+        padding: 1rem;
+        &:focus{
+            border: 1px solid orangered;
+        }
+    }
+
+    &__option{
+        
+    }
+
+    &__wrap{
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        margin: 2rem 0;
+        @media only screen and (max-width:$bp-lg){
+            justify-content: center;
+        }
+    }
+
+    &__quantity{
+        border: 1px solid orangered;
+        padding: 1rem;
+        width: 5rem;
+        
+        &:focus{
+            outline: none;
+        }
+    }
+
+    &__label{
+        font-size: 1.6rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    &__text{
+        color: #777;
+        font-size: 1.5rem;
+        margin-top: 2rem;
+        line-height: 1.2;
+    }
+
+    &__inner-wrap{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 2rem;
+        h2{
+            font-size: 2.5rem;
+        }
+        a{
+            &:visited,
+            &:link{
+                color: #777;
+                font-size: 1.5rem;
+                text-decoration: none;
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from '../images/logo.png'
-import footballImg from '../images/image1.png'
+import footballImg from '../images/headerphoto.png'
 import { Link } from 'react-router-dom'
 import Nav from './Nav'
 function Header() {
@@ -12,9 +12,9 @@ function Header() {
             <Nav/>
             <div className='header__content'>
                 <div className='header__content--text'>
-                  <h1>Give Your Workout A New Style!</h1>
-                  <p>Success isn't always about greatness.It's about consistency. Consistent hard work gains success . Greatness will come.</p>
-                  <Link to='/products'><button className='btn btn-primary'>Explore Now &rarr;</button></Link>
+                  <h1>Order your food from the best restaurants around you!</h1>
+                  <p>We have been working for you to order best food around your restaurants. Now its just one click away, order and we will deliver it for you for free!</p>
+                  <Link to='/restaurants'><button className='btn btn-primary'>Explore Now &rarr;</button></Link>
                 </div>
                 <img src={footballImg} className='header__content--img'/>
             </div>
