@@ -3,6 +3,7 @@ import Nav from './Nav'
 import Footer from './Footer'
 import { useState } from 'react'
 import RemoveFromBasket from './RemoveFromBasket'
+import { useNavigate } from 'react-router-dom'
 
 function Register() {
   const [name, setName] = useState("")
@@ -11,8 +12,10 @@ function Register() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState(null);
+  const [errorKey, setErrorKey] = useState(0)
   const [loading, setLoading] = useState(false);
   let token = localStorage.getItem("token")
+  let navigate = useNavigate();  
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -41,9 +44,10 @@ function Register() {
         let data = await response.json();
         console.log(data)
         setError(data[0]["description"]);
+        setErrorKey(prev => prev + 1)
       }
-      if(response.ok){
-        window.location.href="/"
+      if(response.ok){  
+        navigate(`/confirmEmail/${encodeURIComponent(email)}`)
       }
     } catch (err) {
     } finally {
@@ -55,7 +59,7 @@ function Register() {
     <Nav/>
     {(!token || token=="undefined") ? (
       <div className='register__inner'>
-        {error && <RemoveFromBasket text={error}/>} 
+        {error && <RemoveFromBasket text={error} errorkey={errorKey}/>} 
         <h2 className='register_head'>Register</h2>
         <form action="https://localhost:7092/api/Account/Register" className="register__form">
           <div style={{display:'flex', gap:'1rem'}}>

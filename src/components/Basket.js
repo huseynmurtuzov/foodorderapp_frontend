@@ -9,29 +9,35 @@ import RemoveFromBasket from "./RemoveFromBasket";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import PaymentOptions from "./PaymentOptions";
+import { removeProccess } from "../store/Product";
+import { activeProccess } from "../store/Product";
+import LoadingScreen from "./LoadingScreen";
 
 
 function Basket() {
   const [showRemoveFromBasket, setshowRemoveFromBasket] = useState(false);
   const { addedProducts } = useSelector((state) => state.Product);
+  const { process } = useSelector((state) => state.Product);
   const [alert, setAlert] = useState(false);
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
+  const [isCreditCard, setIsCreditCard] = useState(false)
+  const [isCreditCardValid, setisCreditCardValid] = useState(false)
   // const [totalAmount, setTotalAmount] = useState(0)
   const [customerId, setCustomerId] = useState(0);
   let dispatch = useDispatch()
-
+  let paymentMethod=isCreditCard ? "Credit card" : "Cash"
 
   const navigate = useNavigate();
 
   let count = 0;
   addedProducts.map((product) => {
-    count += product.price * product.quantity;
+    count += product.price;
     // setTotalAmount(count);
   });
   console.log(addedProducts);
   let paymentObject = {
-    paymentMethod: "Credit card",
+    paymentMethod: paymentMethod,
     amount: count,
     isSuccessful: true,
   };
@@ -45,7 +51,13 @@ function Basket() {
     setLoading(true);
     setError(null);
 
-    const userEmail =
+    if(isCreditCard && !isCreditCardValid){
+      setError("Invalid Credit Card Information")
+      console.log("Invalid Credit Card Information")
+      return
+    }
+    else{
+      const userEmail =
       userData[
         "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
       ];
@@ -94,7 +106,7 @@ function Basket() {
       customerId: parseInt(userId),
       restaurantId: addedProducts[0].restaurantId,
       deliveryPersonelId: -10,
-      paymentMethod: "Credit card",
+      paymentMethod: paymentMethod,
       meals: addedProducts,
     });
     try {
@@ -115,13 +127,19 @@ function Basket() {
         throw new Error(response);
       }
       setAlert(true);
-      navigate("/");
+      dispatch(activeProccess());
+      setTimeout(() => {
+        dispatch(removeProccess());
+      }, 3000);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
       dispatch(refreshBasket());
     }
+    }
+
+    
   };
 
   // const fetchData = () => {
@@ -146,6 +164,7 @@ function Basket() {
 
   return (
     <>
+    {process && <LoadingScreen/>}
       {showRemoveFromBasket && (
         <RemoveFromBasket text={"Meal has been removed from the basket"} />
       )}
@@ -204,7 +223,7 @@ function Basket() {
             })}
             {addedProducts[0] && (
               <div className="basket__payment--wrap">
-              <PaymentOptions/>
+              <PaymentOptions setIsCreditCard={setIsCreditCard} setisCreditCardValid={setisCreditCardValid}/>
               <div className="basket__payment">
                  <div className="border-bottom"></div>
                 <div className="basket__inner-subtotal">

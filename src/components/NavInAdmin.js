@@ -14,7 +14,7 @@ import LoadingScreen from './LoadingScreen';
 
 
 
-function Nav() {
+function NavInAdmin() {
   
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,7 +23,6 @@ function Nav() {
   const [token, setToken] = useState("")
   const [tokenDataRole, setTokenDataRole] = useState("")
   const [tokenDataName, setTokenDataName] = useState("")
-  const [inputData, setInputData] = useState("")
   
   useEffect(() => {
     try {
@@ -55,10 +54,6 @@ function Nav() {
     window.location.href = "/login";
   };
 
-  const searchMeal = () => {
-    navigate(`/searchMeal/${inputData}`)
-  }
-
 
   // let token1 = localStorage.getItem("token")
   // const userData1 = jwtDecode(token1);
@@ -86,8 +81,7 @@ const renderNavContent = () => {
       <>
     <li className="nav__item">
       <Link className="nav__link" to="/">
-        {/* Welcome, {tokenDataName} */}
-        <i class="fa-solid fa-user"></i>
+        Welcome, {tokenDataName}
       </Link>
     </li>
     <li className="nav__item">
@@ -95,11 +89,11 @@ const renderNavContent = () => {
         Restaurants
       </Link>
     </li>
-    {/* <li className="nav__item">
+    <li className="nav__item">
       <Link className="nav__link" to="/" onClick={Logout}>
         Logout
       </Link>
-    </li> */}
+    </li>
     <div>
       <OffCanvasExample />
     </div>
@@ -110,15 +104,14 @@ const renderNavContent = () => {
 <>
     <li className="nav__item">
       <Link className="nav__link" to="/DeliveryPersonnelAdminPage">
-        {/* Welcome, {tokenDataName} */}
-        <i class="fa-solid fa-user"></i>
+        Welcome, {tokenDataName}
       </Link>
     </li>
-    {/* <li className="nav__item">
+    <li className="nav__item">
       <Link className="nav__link" to="/" onClick={Logout}>
         Logout
       </Link>
-    </li> */}
+    </li>
     <div>
       <OffCanvasExample />
     </div>
@@ -129,15 +122,14 @@ const renderNavContent = () => {
     <>
         <li className="nav__item">
           <Link className="nav__link" to="/RestaurantAdminPage">
-            {/* Welcome, {tokenDataName} */}
-            <i class="fa-solid fa-user"></i>
+            Welcome, {tokenDataName}
           </Link>
         </li>
-        {/* <li className="nav__item">
+        <li className="nav__item">
           <Link className="nav__link" to="/" onClick={Logout}>
             Logout
           </Link>
-        </li> */}
+        </li>
         <div>
           <OffCanvasExample />
         </div>
@@ -146,27 +138,28 @@ const renderNavContent = () => {
       }else if(tokenDataRole == "Customer"){
           return (
           <>
+          <li className="nav__item">
+                <Link className="nav__link" to="/CustomerAdminPage">
+                  Welcome, {tokenDataName}
+                  {/* <i class="fa-solid fa-user"></i> */}
+                </Link>
+              </li> 
               <li className="nav__item">
                 <Link className="nav__link" to="/restaurants">
                   Restaurants
                 </Link>
               </li>
-              {/* <li className="nav__item">
+              <li className="nav__item">
                 <Link className="nav__link" to="/" onClick={Logout}>
                   Logout
                 </Link>
-              </li> */}
+              </li>
               <li className="nav__item">
                 <Link className="nav__svg" to="/basket">
                   <i className="fa-solid fa-bag-shopping fa-3x"></i>
                 </Link>
               </li>
-              <li className="nav__item">
-                <Link className="nav__link" to="/CustomerAdminPage">
-                  {/* Welcome, {tokenDataName} */}
-                  <i class="fa-solid fa-user"></i>
-                </Link>
-              </li> 
+              
               <div>
                 <OffCanvasExample />
               </div>
@@ -207,10 +200,10 @@ const renderNavContent = () => {
           </Link>
           <p className="nav__logo-text">MurtuzOrder.com</p>
         </div>
-        <div className="nav__search-container">
-          <input type="text" placeholder="Search meals..." className="nav__search-input" value={inputData} onChange={(e) => setInputData(e.target.value)}/>
-          <button onClick={searchMeal} className="nav__search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
+        {/* <div className="nav__search-container">
+          <input type="text" placeholder="Search restaurants..." className="nav__search-input" />
+          <button className="nav__search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div> */}
         <ul>
           {renderNavContent()}
           {/* {(token && tokenDataName == "SuperAdmin") ? (
@@ -278,4 +271,4 @@ const renderNavContent = () => {
   );
 }
 
-export default Nav;
+export default NavInAdmin;

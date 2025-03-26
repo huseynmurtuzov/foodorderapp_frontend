@@ -3,10 +3,28 @@ import logo from '../images/logo.png'
 import footballImg from '../images/headerphoto.png'
 import { Link } from 'react-router-dom'
 import Nav from './Nav'
+import { useState,useEffect } from 'react'
 function Header() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.scrollY > 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    
+    return () => {
+      window.removeEventListener("scroll", toggleVisibility);
+    };
+  }, []);
   return (
     <div className='header'>
-        <a href="#nav" className='btn btn-primary upLink' id='clickRef'><i class="fa-solid fa-arrow-up"></i></a>
+        <a className={`upLink btn btn-primary ${isVisible ? "show" : ""}`} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} href="#nav" id='clickRef'><i class="fa-solid fa-arrow-up"></i></a>
 
         <div className='container'>
             <Nav/>

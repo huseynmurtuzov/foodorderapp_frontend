@@ -20,6 +20,15 @@ import RegisterAsDeliveryPersonnel from './components/RegisterAsDeliveryPersonne
 import CustomerAdminPage from './components/CustomerAdminPage';
 import DeliveryPersonnelAdminPage from './components/DeliveryPersonnelAdminPage';
 import RestaurantAdminPage from './components/RestaurantAdminPage';
+import ConfirmEmail from './components/ConfirmEmail';
+import EmailConfirmed from './components/EmailConfirmed';
+import CookieConsent from './components/CookieContent';
+import SearchMealResult from './components/SearchMealResult';
+import ForgotPassword from './components/ForgotPassword';
+import PasswordConfirmed from './components/PasswordConfirmed';
+import ForgotPasswordConfirm from './components/ForgotPasswordConfirm';
+import ForgotPasswordNotification from './components/ForgotPasswordNotification';
+import ForgotPasswordNotificationAfter from './components/ForgotPasswordNotificationAfter';
 
 function App() {
   return (
@@ -38,7 +47,17 @@ function App() {
           <Route path='/CustomerAdminPage' element={<CustomerAdminPage/>}/>
           <Route path='/DeliveryPersonnelAdminPage' element={<DeliveryPersonnelAdminPage/>}/>
           <Route path='/RestaurantAdminPage' element={<RestaurantAdminPage/>}/>
+          <Route path='/confirmEmail/:email' element={<ConfirmEmail/>}/>
+          <Route path='/emailConfirmed' element={<EmailConfirmed/>}/>
+          <Route path='/passwordConfirmed' element={<PasswordConfirmed/>}/>
+          <Route path='/searchMeal/:query' element={<SearchMealResult/>}/>
+          <Route path='/ForgotPasswordConfirm/:email' element={<ForgotPasswordConfirm/>}/>
+          <Route path='/ForgotPasswordNotification' element={<ForgotPasswordNotification/>}/>
+          <Route path='/ForgotPasswordNotificationAfter' element={<ForgotPasswordNotificationAfter/>}/>
+          <Route path='/forgotPassword' element={<ForgotPassword/>}/>
+
         </Routes>
+        <CookieConsent/>
       </ProductProvider>
 
     </div>

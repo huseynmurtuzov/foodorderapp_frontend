@@ -24,12 +24,23 @@ function ProductDetail({p}) {
   const [error, setError] = useState("")
   const [comments, setComments] = useState([])
   const [info, setInfo] = useState("")
+  const [decodedToken, setDecodedToken] = useState("")
+  const [loggedInId, setLoggedInId] = useState("")
+  const [tokenDataRole, setTokenDataRole] = useState("")
+  const [name, setName] = useState("")
+  const [errorKey, setErrorKey] = useState(0)
  // const datas = ((data[0].concat(data[1])));
   let token = JSON.parse(localStorage.getItem("token"))
-  let decodedToken = jwtDecode(token)
-  let loggedInId = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]
-  let tokenDataRole = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
-  let name = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]
+  useEffect(() => {
+    if (token) {
+      const decoded = jwtDecode(token);
+      setDecodedToken(decoded);
+      setLoggedInId(decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]);
+      setTokenDataRole(decoded["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+      setName(decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]);
+    }
+  }, [token]);  // Sadece token değiştiğinde çalışır
+  
   const timestamp = Date.now(); // Get current timestamp in milliseconds
   const date = new Date(timestamp)
   let formattedDate = date.getFullYear() + '-' + 
@@ -50,6 +61,7 @@ function ProductDetail({p}) {
     })
     .catch((error) => {
         setError(error.message);
+        setErrorKey(prev => prev + 1)
         setLoading(false)
     })
 },[])
@@ -74,6 +86,7 @@ useEffect(() => {
   })
   .catch((error) => {
       setError(error.message);
+      setErrorKey(prev => prev + 1)
       setLoading(false)
   })
 },[])
@@ -139,6 +152,7 @@ const deleteComment = async(id) => {
 
     }else{
       setError("We had a problem while deleting your comment! Please try again later!")
+      setErrorKey(prev => prev + 1)
     }
 }
 if (loading) return <p>Yükleniyor...</p>;
@@ -154,7 +168,7 @@ if (loading) return <p>Yükleniyor...</p>;
   return (
 
       <div id='productDetail'>
-        {error && <RemoveFromBasket text={error} />}
+        {error && <RemoveFromBasket text={error} errorkey={errorKey}/>}
         {info && <AddedToBasket text={info} />}
         <a href="#nav" className='btn btn-primary upLink' ref={btn}><i class="fa-solid fa-arrow-up"></i></a>
         <div className='container'>
@@ -167,6 +181,7 @@ if (loading) return <p>Yükleniyor...</p>;
             </div>
             <div className='comments'>
               <p style={{fontSize:'3rem',textAlign:'center'}}>Comments</p>
+              {comments.length == 0 && <p style={{fontSize:'3rem',textAlign:"center"}}>There are no comments here yet</p>}
                 {comments.map((c) => {
                   console.log("Customer id",c.customerId)
                   return (

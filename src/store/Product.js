@@ -131,6 +131,7 @@ import product12 from '../images/product-12.jpg'
 // });
 const initialState = {
     addedProducts:[],
+    process:false
 }
 
 const product = createSlice({
@@ -147,7 +148,12 @@ const product = createSlice({
         refreshBasket:(state,action) => {
             state.addedProducts = [];
         },
-        
+        activeProccess:(state) => {
+            state.process=true
+        },
+        removeProccess:(state) => {
+            state.process=false
+        },
 
         
     // changeQuantity: (state,action) => {
@@ -170,5 +176,5 @@ const product = createSlice({
     // },
 })
 
-export const {addBasket,removeProductFromBasket,refreshBasket} = product.actions;
+export const {addBasket,removeProductFromBasket,refreshBasket,activeProccess,removeProccess} = product.actions;
 export default product.reducer;

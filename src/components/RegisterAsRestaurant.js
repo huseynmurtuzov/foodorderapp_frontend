@@ -3,6 +3,7 @@ import Nav from './Nav'
 import Footer from './Footer'
 import { useState } from 'react'
 import RemoveFromBasket from './RemoveFromBasket'
+import { useNavigate } from 'react-router-dom'
 function RegisterAsRestaurant() {
   const [name, setName] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
@@ -12,7 +13,9 @@ function RegisterAsRestaurant() {
   const [workingHours, setWorkingHours] = useState("")
   const [image, setImage] = useState("")
   const [error, setError] = useState(null);
+  const [errorKey, setErrorKey] = useState(0)
   const [loading, setLoading] = useState(false);
+  let navigate = useNavigate();
 
   let token = localStorage.getItem("token")
   const handleRegister = async (e) => {
@@ -47,9 +50,10 @@ function RegisterAsRestaurant() {
         let data = await response.json();
         console.log(data)
         setError(data[0]["description"]);
+        setErrorKey(prev => prev + 1)
       }
-      if(response.ok){
-        window.location.href="/"
+      if(response.ok){  
+        navigate(`/confirmEmail/${encodeURIComponent(email)}`)
       }
 
     } catch (err) {
@@ -63,7 +67,7 @@ function RegisterAsRestaurant() {
         <Nav/>
         {(token=="undefined" || !token) ? (
           <div className='register__inner'>
-            {error && <RemoveFromBasket text={error}/>} 
+            {error && <RemoveFromBasket text={error} errorkey={errorKey}/>} 
             <h2 className='register_head'>Register As Restaurant</h2>
             <form action="https://localhost:7092/api/Account/Register/Restaurant" className="register__form">
               <div style={{display:'flex', gap:'1rem'}}>

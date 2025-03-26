@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
 import { addBasket } from '../store/Product';
@@ -7,8 +7,18 @@ import { refreshBasket } from '../store/Product';
 import AddedToBasket from './AddedToBasket';
 import { Modal } from '@mui/material';
 import BasketBtn from './BasketBtn';
+import { jwtDecode } from 'jwt-decode';
 function Food({product}) {
     const [quantity, setQuantity] = useState(1)
+    const [tokenDataRole, setTokenDataRole] = useState("")
+    let token = localStorage.getItem('token')
+    useEffect(() => {
+      if (token) {
+      const token1 = JSON.parse(localStorage.getItem('token'));
+      const userData = jwtDecode(token1);
+      setTokenDataRole(userData["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+      }
+    },[])
     
     /* eslint-disable no-alert */
     // const [showModal, setShowModal] = useState(false);
@@ -80,7 +90,7 @@ function Food({product}) {
             
               <div className='detail__wrap'>
                 <input className='detail__quantity' type='number' value={quantity}  onChange={e => handleQuantityChange(e)}/>
-                <BasketBtn  product={product}/>
+                {tokenDataRole == "Customer" && <BasketBtn  product={product}/>}
               </div>
               <p className='detail__label'>Product Details</p>
               <p className='detail__text'>{newDesc}</p>

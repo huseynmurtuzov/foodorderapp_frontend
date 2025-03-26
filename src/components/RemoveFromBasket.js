@@ -1,25 +1,24 @@
-import React from 'react'
-import { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-
-function RemoveFromBasket({ text }) {
-  const [visible, setVisible] = useState(true);
+function RemoveFromBasket({ text,errorkey }) {
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setVisible(false);
-    }, 3000); // 3 saniye sonra kapanacak
-
-    return () => clearTimeout(timer);
-  }, []);
+    if (text) {
+      setVisible(true);
+ // Key değişiyor, React bileşeni sıfırdan oluşturuyor
+      const timer = setTimeout(() => setVisible(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [errorkey]); // text değiştiğinde çalışır
 
   if (!visible) return null;
 
   return (
-    <div className='removeFromBasket'>
-        <p className='removeFromBasket_text'>{text}</p>
-        <button className="closeButton" onClick={() => setVisible(false)}>×</button>
-        <div className="loadingBar"></div>
+    <div key={errorkey} className='removeFromBasket'> {/* Key değiştiği için bileşen resetlenir */}
+      <p className='removeFromBasket_text'>{text}</p>
+      <button className="closeButton" onClick={() => setVisible(false)}>×</button>
+      <div className="loadingBar"></div>
     </div>
   );
 }

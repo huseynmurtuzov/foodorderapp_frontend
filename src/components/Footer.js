@@ -18,7 +18,7 @@ function Footer() {
                 </div>
                 <div className='footer__inner-2'>
                     <div style={{display:"flex",alignItems:"center"}}>
-                    <img src={whiteLogo} className='footer__inner-2-img' /> <span style={{color:"orangered",fontWeight:"bold",fontSize:"3rem",textAlign:"center"}}>MurtuzAminOrder.com</span>
+                    <img src={whiteLogo} className='footer__inner-2-img' /> <span style={{color:"orangered",fontWeight:"bold",fontSize:"3rem",textAlign:"center"}}>MurtuzOrder.com</span>
                     </div>
                     <p>Our Purpose is To Sustainably Make the Pleasure and Benefits of Sports Accessible to the Many</p>
                 </div>

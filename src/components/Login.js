@@ -18,6 +18,7 @@ function Login() {
   const [passwordValue, setPasswordValue] = useState('');
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [errorKey, setErrorKey] = useState(0)
 
   const navigate = useNavigate();
   let token = localStorage.getItem("token")
@@ -42,7 +43,8 @@ function Login() {
       const data = await response.json();
       console.log(data)
       if (!response.ok) {
-          setError(data[""][0]);
+          setError("We had a problem while signing you in!");
+          setErrorKey(prev => prev + 1)
       }
 
       const token = data.token;
@@ -73,7 +75,7 @@ function Login() {
 
   return (
     <>
-    {error && <AddedToBasket text={error} />}
+    {error && <RemoveFromBasket text={error}  errorkey={errorKey}/>}
       <div className="header"> 
         <div className="container">
           <Nav />
@@ -111,8 +113,8 @@ function Login() {
                       {loading ? 'Logging in...' : 'Login'}
                     </button>
                     
-                     {error && <RemoveFromBasket text={error}/>} 
-                    <a href="#" className="contact__fp">
+                     {error && <RemoveFromBasket text={error} errorkey={errorKey}/>} 
+                    <a href="/forgotPassword" className="contact__fp">
                       Forgot Password
                     </a>
                     <a href="/register" className="contact__fp">

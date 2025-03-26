@@ -9,6 +9,9 @@ import LoadingScreen from "./LoadingScreen";
 import RemoveFromBasket from "./RemoveFromBasket";
 import AddedToBasket from "./AddedToBasket";
 import { SettingsInputAntenna } from "@mui/icons-material";
+import OrderDetail from "./OrderDetail";
+import NavInAdmin from "./NavInAdmin";
+import OrderFilterCustomer from "./OrderFilterCustomer";
 
 function RestaurantAdminPage() {
   const [restaurantData, setRestaurantData] = useState({});
@@ -33,7 +36,9 @@ function RestaurantAdminPage() {
   const [totalRevenue, settotalRevenue] = useState(0);
   const [error, setError] = useState("")
   const [info, setInfo] = useState("")
-
+  const [errorKey, setErrorKey] = useState(0)
+  const [filter, setFilter] = useState("pending")
+  
 
   const navigate = useNavigate(); 
   let decodedtoken = jwtDecode(localStorage.getItem("token"));
@@ -309,6 +314,7 @@ function RestaurantAdminPage() {
     });
     if (!response.ok) {
       setError("Please enter the proper meal details")
+      setErrorKey(prev => prev + 1)
       setLoading(false);
     } else {
       const data = await response.json();
@@ -347,6 +353,7 @@ function RestaurantAdminPage() {
     if (!response.ok) {
       console.error("Error in API request:", response);
       setError("Please enter the proper meal details")
+      setErrorKey(prev => prev + 1)
       setLoading(false);
       // setEditMode(false)
     } else {
@@ -372,6 +379,7 @@ function RestaurantAdminPage() {
       .then((response) => {
         if (!response.ok) {
           setError("We had a problem while trying to delete your account!")
+          setErrorKey(prev => prev + 1)
         }
         setInfo("Your account has been deleted successfully!")
         return response.json();
@@ -396,9 +404,9 @@ function RestaurantAdminPage() {
   return (
     <>
       <div className="container">
-      {error && <RemoveFromBasket text={error} />}
+      {error && <RemoveFromBasket text={error} errorkey={errorKey}/>}
       {info && <AddedToBasket text={info} />}
-        <Nav />
+       <NavInAdmin/>
         {role === "Restaurant" ? (
           <>
             {!loading && !editMode && (
@@ -454,18 +462,20 @@ function RestaurantAdminPage() {
 
                 <div className="deliveryPersonnelAdmin__orders">
                   <h2 style={{ textAlign: "center" }}>Orders</h2>
+                  <OrderFilterCustomer setFilter={setFilter}/>
                   {restaurantOrders.length == 0 && <p style={{textAlign:'center',fontSize:'3rem'}}>There are no orders yet.</p>}
-                  {restaurantOrders.map((r) => (
-                    <div key={r.id} className="deliveryPersonnelAdmin__order">
-                      <div className="deliveryPersonnelAdmin__order--inner">
-                        <p>Order Date: {r.orderDate.split("T")[0]}</p>
-                        <p>Total Amount: {r.totalAmount}</p>
-                      </div>
-                      <div className="deliveryPersonnelAdmin__order--inner">
-                        <p>Status: {r.status}</p>
-                      </div>
-                    </div>
-                  ))}
+                  <div className="deliveryPersonnelAdmin__orders--inner">
+              {filter == "All" && restaurantOrders.map((r) => (
+                 (<OrderDetail order={r} />)
+              ))}
+              </div>
+              <div className="deliveryPersonnelAdmin__orders--inner">
+                {restaurantOrders.map((r) => (
+                 (filter==r.status) && (<OrderDetail order={r} />)
+              ))}
+
+              </div>
+                  
                 </div>
                 <div className="deliveryPersonnelAdmin__orders">
                   <h2 style={{ textAlign: "center" }}>Reviews</h2>

@@ -5,6 +5,12 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 import LoadingScreen from "./LoadingScreen";
+import AddedToBasket from "./AddedToBasket";
+import RemoveFromBasket from "./RemoveFromBasket";
+import OrderDetail from "./OrderDetail";
+import NavInAdmin from "./NavInAdmin";
+import OrderFilter from "./OrderFilterDelivery";
+import OrderFilterDelivery from "./OrderFilterDelivery";
 function DeliveryPersonnelAdminPage() {
   const [deliveryPersonnelData, setDeliveryPersonnelData] = useState({});
   const [editMode, setEditMode] = useState(false)
@@ -13,11 +19,20 @@ function DeliveryPersonnelAdminPage() {
   const [editedPhoneNumber, setEditedPhoneNumber] = useState("");
   const [loading, setLoading] = useState(true)
   const [viewData, setviewData] = useState({})
+  const [error, setError] = useState("")
+  const [info, setInfo] = useState("")
+  const [errorKey, setErrorKey] = useState(0)
+  const [filter, setFilter] = useState("Prepared")
+
 
   const navigate = useNavigate()
-  
+  console.log(deliveryPersonnelData)
+
   let decodedtoken = jwtDecode(localStorage.getItem("token"))
   let role = decodedtoken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+
+
+  //fetch deliverypersonnel datas
   useEffect(() => {
     setLoading(true);
     fetch(`/api/DeliveryPersonnel/${decodedtoken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]}`, {
@@ -35,6 +50,9 @@ function DeliveryPersonnelAdminPage() {
       })
       .then((data) => {
         setDeliveryPersonnelData(data || {});
+        setEditedName(data.name)
+        setEditedPhoneNumber(data.phoneNumber)
+        setEditedVeichleType(data.veichleType)
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -43,33 +61,33 @@ function DeliveryPersonnelAdminPage() {
         setLoading(false);
       });
   }, []);
-  
-  useEffect(() => {
-    setLoading(true);
-    fetch(`/api/DeliveryPersonnel/performance/${decodedtoken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setviewData(data || {});
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetch(`/api/DeliveryPersonnel/performance/${decodedtoken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"]}`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //       Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       setviewData(data || {});
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data:", error);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // }, []);
 
   console.log(viewData)
 
@@ -90,16 +108,16 @@ function DeliveryPersonnelAdminPage() {
             veichleType: editedVeichleType,
             phoneNumber: editedPhoneNumber,
         }),
-        credentials:"include" 
+        credentials:"include"
     });
 
     if (!response.ok) {
         console.log(response);
+        setError("Please enter proper delivery personnel detail!");
+        setErrorKey(prev => prev + 1)
 
-    } else {
-        const data = await response.json();
-        console.log('Response:', data);
-        navigate("/")
+    } if(response.ok) {
+        setInfo("Delivery personnel details updated successfully!")
     }
 };
   const handleDelete = () => {
@@ -112,47 +130,33 @@ function DeliveryPersonnelAdminPage() {
       },
     }).then((response) => {
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        setError("We had a problem while deleting your account")
+        setErrorKey(prev => prev + 1)
       }
       if(response.ok){
         localStorage.removeItem("token");
-        window.location.href = "/"
+        setInfo("Account deleted successfully!")
+        navigate("/login")
       }
     });
   };
 
-  const setAsDelivered = (id) => {
-    fetch(`https://localhost:7092/api/Orders/${id}/setAsDelivered`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
 
-      },
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      if(response.ok){
-        window.location.href = "/DeliveryPersonnelAdminPage"  
-      }
-    });
-    
-  }
   if(loading){
     return <p>LOADING...</p>
   }
 
-  console.log(deliveryPersonnelData)
+
 
   if(loading){
-    return <LoadingScreen/>
+    return <LoadingScreen setFilter={setFilter}/>
   }
   return (
     <>
   <div className="container">
-    <Nav />
+    <NavInAdmin/>
+    {error && <RemoveFromBasket text={error} errorkey={errorKey}/>}
+    {info && <AddedToBasket text={info} />}
     {role === "DeliveryPersonnel" ? (
       <>
         {!editMode ? (
@@ -165,7 +169,7 @@ function DeliveryPersonnelAdminPage() {
                     <p className="restaurantAdmin__card--p">{deliveryPersonnelData.name}</p>
                   </div>
                 </div>
-               
+
                 <div className="restaurantAdmin_dataWrap">
                   <div class="restaurantAdmin__card">
                     <h3 className="restaurantAdmin__card--h3">Veichle Type</h3>
@@ -177,7 +181,7 @@ function DeliveryPersonnelAdminPage() {
                     <h3 className="restaurantAdmin__card--h3">Phone Number</h3>
                     <p className="restaurantAdmin__card--p">{deliveryPersonnelData.phoneNumber}</p>
                   </div>
-                </div>                
+                </div>
                 </div>
             {/* <div className="deliveryPersonnelAdmin_dataWrap">
               <p>Name</p>
@@ -199,26 +203,26 @@ function DeliveryPersonnelAdminPage() {
             </div> */}
             <div className="deliveryPersonnelAdmin__orders">
               <h2 style={{ textAlign: "center" }}>Orders</h2>
-              {deliveryPersonnelData.orders.map((r) => (
-                <div key={r.id} className="deliveryPersonnelAdmin__order">
-                  <div className="deliveryPersonnelAdmin__order--inner">
-                    <p>Order Date: {r.orderDate.split("T")[0]}</p>
-                    <p>Total Amount: {r.totalAmount}</p>
-                  </div>
-                  <div className="deliveryPersonnelAdmin__order--inner">
-                    <p>Status: {r.status}</p>
-                    {(r.status === "pending" || r.status === "Preparing") && (
-                      <button
-                        className="btn btn-primary"
-                        onClick={() => setAsDelivered(r.id)}
-                      >
-                        Set as Delivered
-                      </button>
-                    )}
-                  </div>
-                </div>
+              <OrderFilterDelivery setFilter={setFilter}/>
+
+              <div className="deliveryPersonnelAdmin__orders--inner">
+                {filter == "All" && deliveryPersonnelData.orders.map((r) => (
+                 (<OrderDetail order={r} />)
               ))}
-              {viewData && (
+              </div>
+              {/* {filter == "Pending" && pendingOrders.map((r) => {
+                 <OrderDetail order={r}/>
+              })}
+              {filter == "Delivered" && deliveredOrders.map((r) => {
+                 <OrderDetail order={r}/>
+              })} */}
+               <div className="deliveryPersonnelAdmin__orders--inner">
+                {deliveryPersonnelData.orders.map((r) => (
+                 (filter==r.status) && (<OrderDetail order={r} />)
+              ))}
+
+              </div>
+              {Object.keys(viewData).length > 0 && (
                 <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
                 <caption style={{ fontSize: '1.5rem', marginBottom: '10px', fontWeight: 'bold' }}>
                   Delivery Personnel Performance
@@ -263,7 +267,7 @@ function DeliveryPersonnelAdminPage() {
                     <td style={{ border: '1px solid #ddd', textAlign: 'center', padding: '10px' }}>{viewData.deliveryPersonnelName}</td>
                     <td style={{ border: '1px solid #ddd', textAlign: 'center', padding: '10px' }}>{viewData.totalDeliveredOrders}</td>
                   </tr>
-                  
+
                 </tbody>
               </table>
 

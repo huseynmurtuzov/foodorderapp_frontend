@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 import LoadingScreen from "./LoadingScreen";
 import RemoveFromBasket from "./RemoveFromBasket";
 import AddedToBasket from "./AddedToBasket";
+import OrderDetail from "./OrderDetail";
+import NavInAdmin from "./NavInAdmin";
+import OrderFilter from "./OrderFilterDelivery";
+import OrderFilterCustomer from "./OrderFilterCustomer";
 function CustomerAdminPage() {
   const [customerData, setCustomerData] = useState("");
   const [loading, setLoading] = useState(true);
@@ -17,7 +21,10 @@ function CustomerAdminPage() {
   const [orders, setOrders] = useState([])
   const [comments, setComments] = useState([])
   const [error, setError] = useState("")
-  const [info, setInfo] = useState("")
+  const [info, setInfo] = useState("") 
+  const [errorKey, setErrorKey] = useState(0)
+  const [filter, setFilter] = useState("pending")
+  
   let decodedtoken = jwtDecode(localStorage.getItem("token"))
   let role = decodedtoken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
 
@@ -87,6 +94,7 @@ function CustomerAdminPage() {
       .finally(() => {
         setLoading(false);
       });
+      setLoading(false)
   }, []);
 
 
@@ -145,6 +153,7 @@ function CustomerAdminPage() {
     if (!response.ok) {
         console.log(response);
         setError("Please enter the proper meal details")
+        setErrorKey(prev => prev + 1)
         setLoading(false);
     } else {
         const data = await response.json();
@@ -183,6 +192,7 @@ function CustomerAdminPage() {
     }).then((response) => {
       if (!response.ok) {
         setError("We had a problem while deleting comment! Try again later!")
+        setErrorKey(prev => prev + 1)
       }
       if(response.ok){
         setInfo("The comment has been edited successfully!");
@@ -202,11 +212,12 @@ function CustomerAdminPage() {
   
   return (
     <>
+    {loading && <LoadingScreen/>}
     <div className="container">
-      {error && <RemoveFromBasket text={error} />}
+      {error && <RemoveFromBasket text={error} errorkey={errorKey}/>}
             {info && <AddedToBasket text={info} />}
     {/* {loading && <LoadingScreen/>} */}
-      <Nav />
+      <NavInAdmin />
       {role === "Customer" ? (
         !editMode ? ( 
           <div className="customerAdmin">
@@ -274,20 +285,20 @@ function CustomerAdminPage() {
             <div className="deliveryPersonnelAdmin__orders">
               <h2 style={{ textAlign: "center" }}>Orders</h2>
               
+              <OrderFilterCustomer setFilter={setFilter}/>
                 {orders.length === 0 && <p style={{textAlign:'center',fontSize:'2rem'}}>There are no orders yet.</p>}
-                {orders?.map((order) => (
-                <div key={order.id} className="orderCard">
-                <div className="orderCard__details">
-                  <p><strong>Order Date:</strong> {order.orderDate.split("T")[0]}</p>
-                  <p><strong>Total Amount:</strong> {order.totalAmount}</p>
-                </div>
-                <div className="orderCard__status">
-                  <p><strong>Status:</strong> {order.status}</p>
-                </div> 
-              </div>
+              <div className="deliveryPersonnelAdmin__orders--inner">
+              {filter == "All" && orders.map((r) => (
+                 (<OrderDetail order={r} />)
               ))}
+              </div>
               
-            
+              <div className="deliveryPersonnelAdmin__orders--inner">
+                {orders.map((r) => (
+                 (filter==r.status) && (<OrderDetail order={r} />)
+              ))}
+
+              </div>
             </div> 
             
   
