@@ -304,6 +304,23 @@ body {
   visibility: visible;
 }
 
+.fa-bell {
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+  position: relative;
+}
+
+.notification-symbol {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+}
+
 .header {
   height: 100vh;
   background-image: linear-gradient(to bottom, #fdd8cc, #f8e6e6, #fdd8cc);
@@ -1976,6 +1993,81 @@ body {
   color: white;
   border-color: #ff9800;
   font-weight: bold;
+}
+
+.notifications-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.notifications-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notification-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: space-between;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+.unread {
+  background: #ffefd5;
+  border-color: #ffa500;
+}
+
+.read {
+  background: #f5f5f5;
+  border-color: #d3d3d3;
+}
+
+.notification-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-read {
+  display: none;
+}
+
+.notification-message {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  color: #ff0000;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.delete-button:hover {
+  color: #cc0000;
+}
+
+.no-notifications {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
 }
 
 /*# sourceMappingURL=style.css.map */

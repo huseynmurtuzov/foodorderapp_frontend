@@ -22,8 +22,10 @@ function NavInAdmin() {
   const [error, setError] = useState("")
   const [token, setToken] = useState("")
   const [tokenDataRole, setTokenDataRole] = useState("")
-  const [tokenDataName, setTokenDataName] = useState("")
+  const [tokenDataName, setTokenDataName] = useState("")  
+  const [anyUnread, setanyUnread] = useState(false)
   
+   const [id, setId] = useState("")
   useEffect(() => {
     try {
       const token1 = JSON.parse(localStorage.getItem('token'));
@@ -31,6 +33,7 @@ function NavInAdmin() {
       setLoading(true)
       const userData = jwtDecode(token1);
       setTokenDataRole(userData["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]);
+      setId(userData["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"])
       setTokenDataName(userData["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]);
       console.log(userData)
       setToken(token1);
@@ -42,6 +45,34 @@ function NavInAdmin() {
     }
   }, []);
 
+useEffect(() => {
+      
+        setLoading(true);
+        fetch(`https://localhost:7092/api/Notification/anyUnreadNotification/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            // Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);    
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setanyUnread(data || false);
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+          setLoading(false)
+      }, []);
 
 
         
@@ -108,6 +139,16 @@ const renderNavContent = () => {
       </Link>
     </li>
     <li className="nav__item">
+          <Link className="nav__link" to="/notifications">
+            {/* Welcome, {tokenDataName} */}
+            <i class="fa-solid fa-bell">
+        {anyUnread && <div className='notification-symbol'>
+          
+          </div>}
+        </i>
+          </Link>
+        </li>
+    <li className="nav__item">
       <Link className="nav__link" to="/" onClick={Logout}>
         Logout
       </Link>
@@ -125,6 +166,16 @@ const renderNavContent = () => {
             Welcome, {tokenDataName}
           </Link>
         </li>
+        <li className="nav__item">
+              <Link className="nav__link" to="/notifications">
+                {/* Welcome, {tokenDataName} */}
+                <i class="fa-solid fa-bell">
+        {anyUnread && <div className='notification-symbol'>
+          
+          </div>}
+        </i>
+              </Link>
+            </li>
         <li className="nav__item">
           <Link className="nav__link" to="/" onClick={Logout}>
             Logout
@@ -149,11 +200,22 @@ const renderNavContent = () => {
                   Restaurants
                 </Link>
               </li>
+              
               <li className="nav__item">
                 <Link className="nav__link" to="/" onClick={Logout}>
                   Logout
                 </Link>
               </li>
+              <li className="nav__item">
+                    <Link className="nav__link" to="/notifications">
+                      {/* Welcome, {tokenDataName} */}
+                      <i class="fa-solid fa-bell">
+        {anyUnread && <div className='notification-symbol'>
+          
+          </div>}
+        </i>
+                    </Link>
+                  </li>
               <li className="nav__item">
                 <Link className="nav__svg" to="/basket">
                   <i className="fa-solid fa-bag-shopping fa-3x"></i>

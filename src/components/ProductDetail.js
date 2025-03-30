@@ -90,7 +90,8 @@ useEffect(() => {
       setLoading(false)
   })
 },[])
-console.log(comments)
+
+
 
 
 const sendComment = async() => {
@@ -155,6 +156,7 @@ const deleteComment = async(id) => {
       setErrorKey(prev => prev + 1)
     }
 }
+console.log(data)
 if (loading) return <p>Yükleniyor...</p>;
 // if (error) return <p>Hata: {error}</p>;
   // const handleAddBasket = () => {
@@ -176,7 +178,7 @@ if (loading) return <p>Yükleniyor...</p>;
             {/* <h3 className='product__ft--text'>{product.name}</h3> */}
             <div className='product__ft--img-wrap' style={{display:'flex',flexDirection:"column"}}>
                 {data.map((product,index) => {
-                    return <Food product={product} key={index}/>
+                    return <Food product={product} key={index} />
                 })}
             </div>
             <div className='comments'>

@@ -29,6 +29,7 @@ import PasswordConfirmed from './components/PasswordConfirmed';
 import ForgotPasswordConfirm from './components/ForgotPasswordConfirm';
 import ForgotPasswordNotification from './components/ForgotPasswordNotification';
 import ForgotPasswordNotificationAfter from './components/ForgotPasswordNotificationAfter';
+import Notifications from './components/Notifications';
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
           <Route path='/ForgotPasswordNotification' element={<ForgotPasswordNotification/>}/>
           <Route path='/ForgotPasswordNotificationAfter' element={<ForgotPasswordNotificationAfter/>}/>
           <Route path='/forgotPassword' element={<ForgotPassword/>}/>
+          <Route path='/notifications' element={<Notifications/>}/>
 
         </Routes>
         <CookieConsent/>

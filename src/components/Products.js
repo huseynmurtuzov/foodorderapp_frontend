@@ -29,7 +29,6 @@ function Products() {
             setLoading(false);
         })
     },[])
-    console.log(data)
     if (loading) return <p>Yükleniyor...</p>;
     if (error) return <p>Hata: {error}</p>;
   return (
